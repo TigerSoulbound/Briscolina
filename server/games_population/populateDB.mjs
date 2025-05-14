@@ -10,7 +10,16 @@ const db = new sqlite.Database('../db/games.db', (err) => {
     }
 });
 
-const csvFilePath = "Briscolina - Punteggi.csv"
+db.run("DELETE FROM games", (err) => {
+    if (err) {
+        console.error("Error deleting data:", err)
+    }
+    else {
+        console.log("Deleted all data from games table")
+    }
+})
+
+const csvFilePath = "Briscolina_Punteggi.csv"
 fs.readFile(csvFilePath, "utf8", (err, data) => {
     if (err) {
         console.error("Error reading the CSV file:", err)
