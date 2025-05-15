@@ -7,7 +7,6 @@ export default function TableComponent (props) {
 
     useEffect(() => {
         props.data.then((data) => {
-            console.log(data)
             setData(data)
         }).catch((error) => {
             console.error("Error loading data:", error)
@@ -15,31 +14,20 @@ export default function TableComponent (props) {
     }, [props.data])
 
     return (
-        <Table stripped striped hover responsive>
+        <Table striped hover responsive>
             <thead>
                 <tr>
-                    <th>GAME_ID</th>
-                    <th>DATE</th>
-                    <th>TYPE</th>
-                    <th>PLAYER</th>
-                    <th>PARTNER</th>
-                    <th>SCORE</th>
-                    <th>HAS_PLAYED</th>
-                    <th>HAS_WON</th>
+                    {props.header.map((header, index) => (
+                        <th key={index}>{header}</th>
+                    ))}
                 </tr>
             </thead>
             <tbody>
-                {data.map((game) => (
-                    <tr key={game.id}>
-                        <td>{game.game_id}</td>
-                        <td>{game.date}</td>
-                        <td>{game.type}</td>
-                        <td>{game.player}</td>
-                        <td>{game.partner ? game.partner : ""}</td>
-                        <td>{game.score}</td>
-                        <td>{game.has_played ? "Yes" : "No"}</td>
-                        <td>{game.has_won ? "Yes" : "No"}</td>
-                        
+                {data.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                        {Object.keys(row).map((key, colIndex) => (
+                            <td key={colIndex}>{row[key]}</td>
+                        ))}
                     </tr>
                 ))}
             </tbody>

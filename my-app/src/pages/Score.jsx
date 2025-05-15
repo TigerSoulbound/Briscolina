@@ -8,6 +8,6 @@ import TableComponent from '../components/tables/TableComponent';
 
 export default function Score () {
     return (
-        <TableComponent data = {loadGames()}></TableComponent>
+        <TableComponent header = {["Game ID", "Date", "Game Type", "Player", "Partner", "Score", "Has Played", "Has Won"]} data = {loadGames()}></TableComponent>
     )
 }

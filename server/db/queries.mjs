@@ -34,7 +34,7 @@ export function retrievePlayers () {
 
 export function retrieveGames () {
     return new Promise((resolve, reject) => {
-        const sql = `SELECT G.id AS id, game_id, date, type, P1.name AS player, P2.name AS partner, score, has_played, has_won 
+        const sql = `SELECT game_id, date, type, P1.name AS player, P2.name AS partner, score, has_played, has_won 
                     FROM games G, players P1, game_types T
                     LEFT JOIN players P2 ON G.partner_id = P2.id
                     WHERE G.player_id = P1.id AND G.game_type_id = T.id
