@@ -2,7 +2,7 @@ import sqlite from "sqlite3"
 
 import fs from "fs"
 
-const db = new sqlite.Database('../db/games.db', (err) => {
+const db = new sqlite.Database('../../data/games.db', (err) => {
     if (err) {
         console.error(err.message);
     } else {
@@ -19,7 +19,7 @@ db.run("DELETE FROM games", (err) => {
     }
 })
 
-const csvFilePath = "Briscolina_Punteggi.csv"
+const csvFilePath = "../../data/Briscolina_Punteggi.csv"
 fs.readFile(csvFilePath, "utf8", (err, data) => {
     if (err) {
         console.error("Error reading the CSV file:", err)
@@ -49,7 +49,7 @@ fs.readFile(csvFilePath, "utf8", (err, data) => {
                     player_id = 0; // Default value if no match
             }
             let partner_id;
-            switch (columns[2]) {
+            switch (columns[7]) {
                 case "Andrea":
                     partner_id = 1;
                     break;
@@ -66,7 +66,7 @@ fs.readFile(csvFilePath, "utf8", (err, data) => {
                     partner_id = 5;
                     break;
                 default:
-                    player_id = 0; // Default value if no match
+                    partner_id = null; // Default value if no match
             }
             const hasPlayed = columns[4] === "Si" ? true : false;
             const hasWon = columns[5] === "Si" ? true : false;
